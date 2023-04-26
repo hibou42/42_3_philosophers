@@ -14,6 +14,7 @@
 # define PHILOSOPHERS_H
 
 # include "./libft/libft.h"
+#include <pthread.h>
 
 typedef struct s_c_list
 {

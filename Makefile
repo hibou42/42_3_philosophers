@@ -39,7 +39,7 @@ BS_N_TXT			=		echo "\n"
 #***** Flags *****#
 
 CC				=		gcc
-CFLAGS			=		-Wall -Wextra -Werror -g
+CFLAGS			=		-Wall -Wextra -Werror -g -pthread
 L				=		$(CFLAGS) -fsanitize=address
 RM				=		rm -f
 
