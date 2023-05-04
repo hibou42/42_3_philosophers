@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex.c                                        :+:      :+:    :+:   */
+/*   str_to_int.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aschaefe <aschaefe@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: aschaefe <aschaefe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 13:21:49 by aschaefe          #+#    #+#             */
-/*   Updated: 2022/11/11 11:42:40 by aschaefe         ###   ########.fr       */
+/*   Created: 2023/05/04 15:31:51 by aschaefe          #+#    #+#             */
+/*   Updated: 2023/05/04 15:34:59 by aschaefe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../philosophers.h"
 
-int	ft_puthex(unsigned long long nbr)
+int	str_to_int(const char *str)
 {
+	int	i;
+	int	neg;
 	int	res;
 
+	i = 0;
+	neg = 1;
 	res = 0;
-	if (nbr >= 16)
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		res += ft_puthex(nbr / 16);
-		res += ft_puthex(nbr % 16);
+		res = ((res * 10) + str[i] - '0');
+		i++;
 	}
-	if (nbr < 16)
-	{
-		res++;
-		if (nbr <= 9)
-			ft_putchar_fd(nbr + '0', 1);
-		else
-			ft_putchar_fd((nbr - 10) + 'a', 1);
-	}
-	return (res);
+	return (res * neg);
 }

@@ -6,37 +6,37 @@
 /*   By: aschaefe <aschaefe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 14:57:53 by aschaefe          #+#    #+#             */
-/*   Updated: 2023/04/26 14:57:53 by aschaefe         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:55:03 by aschaefe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void *routine(void *text)
+void test(t_philo *philo)
 {
-	printf("Thread [%s]\n", (char *)text);
-	sleep(2);
-	printf("Thread finish\n");
-	return (NULL);
+	printf("%d\n", philo->nb_philo);
+	printf("%d\n", philo->t_die);
+	printf("%d\n", philo->t_eat);
+	printf("%d\n", philo->t_sleep);
+	printf("%d\n", philo->nb_must_eat);
 }
 
 int main (int argc, char **argv)
 {
-    t_philo philo;
+	t_philo philo;
 
-    philo = (t_philo){};
-    (void)philo;
-    (void)argc;
-    (void)argv;
-
-    pthread_t t1;
-	pthread_t t2;
-	char *test = "hello world";
-	char *test2 = "goodbye world";
-	
-	pthread_create(&t1, NULL, &routine, test);
-	pthread_create(&t2, NULL, &routine, test2);
-	pthread_join(t1, NULL);
-	pthread_join(t2, NULL);
+	philo = (t_philo){};
+	check_arg(argc, argv, &philo);
+	init_struct(argv, &philo);
+	test(&philo);
+	init_thread(&philo);
+	check_thread(&philo);
+	init_mutex_fork(&philo);
 	return (0);
 }
+
+/*
+number_of_philosophers time_to_die time_to_eat
+time_to_sleep
+[number_of_times_each_philosopher_must_eat]
+*/

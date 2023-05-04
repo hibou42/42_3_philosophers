@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_s.c                                           :+:      :+:    :+:   */
+/*   free_and_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aschaefe <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: aschaefe <aschaefe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/04 17:34:24 by aschaefe          #+#    #+#             */
-/*   Updated: 2022/11/11 18:16:21 by aschaefe         ###   ########.fr       */
+/*   Created: 2023/05/04 15:30:48 by aschaefe          #+#    #+#             */
+/*   Updated: 2023/05/04 15:34:57 by aschaefe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../philosophers.h"
 
-int	core_s(char *str)
+void	free_and_exit(t_philo *philo, char *msg, int force_exit)
 {
-	int	i;
-
-	i = 0;
-	if (!str)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
-	while (str[i])
-	{
-		ft_putchar_fd(str[i], 1);
-		i++;
-	}
-	return (i);
+	(void)philo;
+	//clean struct
+	printf("Error : %s\n", msg);
+	if (force_exit != 0)
+		exit(1);
 }

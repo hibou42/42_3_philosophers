@@ -9,13 +9,13 @@ MAKEFLAGS += --no-print-directory
 #***** Sources / Objs *****#
 
 SRC				=		philosophers.c \
+						check/check.c \
+						init/init.c \
+						error/free_and_exit.c \
+						util/str_to_int.c \
+						work/routine.c \
 						
 OBJS			=		$(SRC:.c=.o)
-
-#***** Libft *****#
-
-LIBFT			=		./libft/libft.a
-MLIBFT			=		@$(MAKE) -C libft
 
 #***** Couleurs *****#
 
@@ -45,11 +45,7 @@ RM				=		rm -f
 
 #***** Compilation *****#
 
-all : logo lib start $(NAME)
-
-lib:
-			@$(MLIBFT) all
-			@$(END_COMP_LIB_TXT)
+all : logo start $(NAME)
 
 logo :
 			@tput setaf 2; cat ascii_art/hibou; tput setaf default
@@ -59,7 +55,7 @@ start:
 			@tput setaf 2; cat ascii_art/philosophers; tput setaf default
 			@$(START_TXT)
 
-%.o:		%.c ./libft/libft.h Makefile
+%.o:		%.c
 			@$(CC) $(CFLAGS) -c $< -o $@
 			@$(CHARG_LINE_TXT)
 
@@ -79,21 +75,19 @@ leaks :		all
 
 test: 		all
 			@$(TEST_TXT)
-			@./$(NAME)
-			@rm -f ./$(NAME)
+			@./$(NAME) 5 600 200 100
+			@make fclean
 
 #***** Clean *****#
 
 clean:
 			@$(CLEAN_TXT)
 			@${RM} ${OBJS}
-			@${MLIBFT} clean
 			@tput setaf 1; cat ascii_art/trash; tput setaf default
 
 fclean:		clean
 			@$(FCLEAN_TXT)	
 			@${RM} ${NAME}
-			@${MLIBFT} fclean
 			@echo "$(GREEN)Cleaning succes$(ENDCOLOR)"
 
 re:			fclean all

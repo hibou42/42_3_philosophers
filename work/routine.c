@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_di.c                                          :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aschaefe <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: aschaefe <aschaefe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/04 17:51:14 by aschaefe          #+#    #+#             */
-/*   Updated: 2022/11/11 17:18:22 by aschaefe         ###   ########.fr       */
+/*   Created: 2023/05/04 15:50:22 by aschaefe          #+#    #+#             */
+/*   Updated: 2023/05/04 16:24:58 by aschaefe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../philosophers.h"
 
-int	core_di(int job)
+void *routine(void *import)
 {
-	int		i;
-	char	*res;
+	t_thread_list *me;
 
-	res = ft_itoa(job);
-	i = 0;
-	if (! res)
+	me = import;
+	while (me->philo->stop == 0)
 	{
-		return (0);
+		printf("Thread start no : %d\n", me->number);
+		sleep(2);
+		printf("Thread finish\n");
+		me->philo->stop = 1;
 	}
-	while (res[i])
-	{
-		ft_putchar_fd(res[i], 1);
-		i++;
-	}
-	free(res);
-	return (i);
+	return (NULL);
 }
