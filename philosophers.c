@@ -28,10 +28,10 @@ int main (int argc, char **argv)
 	philo = (t_philo){};
 	check_arg(argc, argv, &philo);
 	init_struct(argv, &philo);
+	init_mutex_fork(&philo);
 	test(&philo);
 	init_thread(&philo);
 	check_thread(&philo);
-	init_mutex_fork(&philo);
 	return (0);
 }
 

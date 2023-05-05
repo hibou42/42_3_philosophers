@@ -50,7 +50,7 @@ void	check_thread(t_philo *philo);
 int		str_to_int(const char *str);
 
 // work
-void *routine(void *philo);
+void 	*routine(void *philo);
 
 // error
 void	free_and_exit(t_philo *philo, char *msg, int force_exit);
