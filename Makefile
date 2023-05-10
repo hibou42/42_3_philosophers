@@ -9,12 +9,14 @@ MAKEFLAGS += --no-print-directory
 #***** Sources / Objs *****#
 
 SRC				=		philosophers.c \
-						check/check.c \
-						init/init.c \
-						error/free_and_exit.c \
-						util/str_to_int.c \
-						work/routine.c \
-						
+						src/check.c \
+						src/init.c \
+						src/free_and_exit.c \
+						src/str_to_int.c \
+						src/routine.c \
+						src/time.c \
+						src/print.c \
+
 OBJS			=		$(SRC:.c=.o)
 
 #***** Couleurs *****#
@@ -34,7 +36,7 @@ END_COMP_TXT	=		echo "$(GREEN)Compilation is done$(ENDCOLOR)"
 CLEAN_TXT		=		echo "$(RED)Deleting objects$(ENDCOLOR)"
 FCLEAN_TXT		=		echo "$(RED)Deleting program$(ENDCOLOR)"
 CHARG_LINE_TXT	=		echo "$(BG_GREEN)    $(ENDCOLOR)\c"
-BS_N_TXT			=		echo "\n"
+BS_N_TXT		=		echo "\n"
 
 #***** Flags *****#
 
@@ -75,7 +77,7 @@ leaks :		all
 
 test: 		all
 			@$(TEST_TXT)
-			@./$(NAME) 5 600 200 100
+			@./$(NAME) 5 800 200 200
 			@make fclean
 
 #***** Clean *****#

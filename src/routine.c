@@ -6,11 +6,31 @@
 /*   By: aschaefe <aschaefe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:50:22 by aschaefe          #+#    #+#             */
-/*   Updated: 2023/05/04 16:24:58 by aschaefe         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:32:25 by aschaefe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philosophers.h"
+
+void	ft_sleep(t_thread_list *me)
+{
+	print_all(me, 3);
+	ft_usleep(me->philo, me->philo->t_sleep);
+	print_all(me, 4);
+}
+
+void	ft_eat(t_thread_list *me, int next)
+{
+	pthread_mutex_lock(&me->philo->tab_mutex_fork[me->number]);
+	print_all(me, 1);
+	pthread_mutex_lock(&me->philo->tab_mutex_fork[next]);
+	print_all(me, 1);
+	me->last_meal = get_time_now(me->philo);
+	print_all(me, 2);
+	ft_usleep(me->philo, me->philo->t_eat);
+	pthread_mutex_unlock(&me->philo->tab_mutex_fork[me->number]);
+	pthread_mutex_unlock(&me->philo->tab_mutex_fork[next]);
+}
 
 void *routine(void *import)
 {
@@ -23,18 +43,11 @@ void *routine(void *import)
 	else
 		next = me->number + 1;
 	if ((me->number % 2) != 0)
-		sleep(1);
+		ft_usleep(me->philo, 10);
 	while (me->philo->stop == 0)
 	{
-		printf("Thread start no : %d next is : %d\n", me->number, next);
-		pthread_mutex_lock(&me->philo->tab_mutex_fork[me->number]);
-		pthread_mutex_lock(&me->philo->tab_mutex_fork[next]);
-		printf("Miam miam thread nb %d\n", me->number);
-		sleep(1);
-		pthread_mutex_unlock(&me->philo->tab_mutex_fork[me->number]);
-		pthread_mutex_unlock(&me->philo->tab_mutex_fork[next]);
-		me->philo->stop = 1;
+		ft_eat(me, next);
+		ft_sleep(me);
 	}
-	printf("Thread stop no : %d\n", me->number);
 	return (NULL);
 }

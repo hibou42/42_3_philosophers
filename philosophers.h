@@ -6,7 +6,7 @@
 /*   By: aschaefe <aschaefe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 14:57:53 by aschaefe          #+#    #+#             */
-/*   Updated: 2023/05/04 16:15:22 by aschaefe         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:25:34 by aschaefe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,30 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <string.h>
+#include <limits.h>
+#include <sys/time.h>
 
 typedef struct s_thread_list
 {
 	pthread_t				id;
 	int						number;
+	long int				last_meal;
 	struct s_philo			*philo;
 }					t_thread_list;
 
 typedef struct s_philo
 {
 	int				nb_philo;
-	int				t_die;
+	long int		t_die;
 	int				t_eat;
 	int				t_sleep;
 	int				nb_must_eat;
 	int				stop;
+	long int		time_start;
 	t_thread_list	*tab_thread;
 	pthread_mutex_t	*tab_mutex_fork;
+	pthread_mutex_t	print;
 }					t_philo;
 
 // init
@@ -51,6 +57,12 @@ int		str_to_int(const char *str);
 
 // work
 void 	*routine(void *philo);
+void	print_all(t_thread_list *me, int nb);
+
+// time
+void		get_time_start(t_philo *philo);
+long int	get_time_now(t_philo *philo);
+void		ft_usleep(t_philo *philo, long time);
 
 // error
 void	free_and_exit(t_philo *philo, char *msg, int force_exit);

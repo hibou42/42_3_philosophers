@@ -6,7 +6,7 @@
 /*   By: aschaefe <aschaefe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:29:44 by aschaefe          #+#    #+#             */
-/*   Updated: 2023/05/04 15:49:16 by aschaefe         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:07:31 by aschaefe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	check_thread(t_philo *philo)
 {
 	int i;
 	
-	i =0;
+	i = 0;
 	while (i < philo->nb_philo)
 	{
 		pthread_join(philo->tab_thread[i].id, NULL);

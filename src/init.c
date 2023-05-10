@@ -6,7 +6,7 @@
 /*   By: aschaefe <aschaefe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:27:59 by aschaefe          #+#    #+#             */
-/*   Updated: 2023/05/04 16:16:25 by aschaefe         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:50:40 by aschaefe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ void	init_mutex_fork(t_philo *philo)
 	{
 		test = pthread_mutex_init(&philo->tab_mutex_fork[i], NULL);
 		if (test != 0)	
-			free_and_exit(philo, "Mutex init fail", 1);
+			free_and_exit(philo, "Tab fork mutex init fail", 1);
 		i++;
 	}
+	test = pthread_mutex_init(&philo->print, NULL);
+	if (test != 0)	
+			free_and_exit(philo, "Print mutex init fail", 1);
 }
