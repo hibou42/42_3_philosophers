@@ -32,6 +32,7 @@ ENDCOLOR		=		\033[0m
 
 START_TXT		=		echo "$(GREEN)Compilation of $(NAME) just started$(ENDCOLOR)"
 TEST_TXT		=		echo "$(GREY)Running some test$(ENDCOLOR)\n"
+LEAKS_TXT		=		echo "$(RED)Leaks mode activated$(ENDCOLOR)\n"
 END_COMP_TXT	=		echo "$(GREEN)Compilation is done$(ENDCOLOR)"
 CLEAN_TXT		=		echo "$(RED)Deleting objects$(ENDCOLOR)"
 FCLEAN_TXT		=		echo "$(RED)Deleting program$(ENDCOLOR)"
@@ -63,21 +64,21 @@ start:
 
 $(NAME) :	${OBJS}
 			@$(BS_N_TXT)
-			@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
+			@${CC} ${CFLAGS} -o ${NAME} ${OBJS}
 			@$(END_COMP_TXT)
 			@tput setaf 2; cat ascii_art/small_hibou1; tput setaf default
 
-l :			${OBJS}
-			${MLIBFT} all
-			${CC} ${L} -o ${NAME} ${OBJS} ${LIBFT}
+leaks :		${OBJS}
+			@$(BS_N_TXT)
+			@${CC} ${L} -o ${NAME} ${OBJS}
 			@$(END_COMP_TXT)
-
-leaks :		all
-			leaks -atExit -- ./${NAME} 
+			@$(LEAKS_TXT)
+			@./${NAME} 2 310 200 100 1
+			@make fclean
 
 test: 		all
 			@$(TEST_TXT)
-			@./$(NAME) 2 610 200 100
+			@./$(NAME) 2 310 200 100 1
 			@make fclean
 
 #***** Clean *****#
