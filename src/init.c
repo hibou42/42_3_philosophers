@@ -15,11 +15,14 @@
 void	init_struct(char **argv, t_philo *philo)
 {
 	philo->nb_philo = str_to_int(argv[1]);
+	philo->actif_philo = philo->nb_philo;
 	philo->t_die = str_to_int(argv[2]);
 	philo->t_eat = str_to_int(argv[3]);
 	philo->t_sleep = str_to_int(argv[4]);
 	if (argv[5])
 		philo->nb_must_eat = str_to_int(argv[5]);
+	else
+		philo->nb_must_eat = -1;
 }
 
 void	init_thread(t_philo *philo)
@@ -38,6 +41,7 @@ void	init_thread(t_philo *philo)
 			free_and_exit(philo, "Thread init fail", 1);		
 		philo->tab_thread[i].number = i;
 		philo->tab_thread[i].philo = philo;
+		philo->tab_thread[i].nb_must_eat = philo->nb_must_eat;
 		i++;
 	}
 }

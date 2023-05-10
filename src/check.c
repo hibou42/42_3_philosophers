@@ -32,15 +32,3 @@ void	check_arg(int argc, char **argv, t_philo *philo)
 		i++;
 	}
 }
-
-void	check_thread(t_philo *philo)
-{
-	int i;
-	
-	i = 0;
-	while (i < philo->nb_philo)
-	{
-		pthread_join(philo->tab_thread[i].id, NULL);
-		i++;
-	}
-}

@@ -77,7 +77,7 @@ leaks :		all
 
 test: 		all
 			@$(TEST_TXT)
-			@./$(NAME) 5 800 200 200
+			@./$(NAME) 2 610 200 100
 			@make fclean
 
 #***** Clean *****#

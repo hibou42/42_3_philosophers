@@ -26,12 +26,14 @@ typedef struct s_thread_list
 	pthread_t				id;
 	int						number;
 	long int				last_meal;
+	int						nb_must_eat;
 	struct s_philo			*philo;
 }					t_thread_list;
 
 typedef struct s_philo
 {
 	int				nb_philo;
+	int				actif_philo;
 	long int		t_die;
 	int				t_eat;
 	int				t_sleep;

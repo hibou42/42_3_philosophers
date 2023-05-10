@@ -30,6 +30,8 @@ void	ft_eat(t_thread_list *me, int next)
 	ft_usleep(me->philo, me->philo->t_eat);
 	pthread_mutex_unlock(&me->philo->tab_mutex_fork[me->number]);
 	pthread_mutex_unlock(&me->philo->tab_mutex_fork[next]);
+	if (me->nb_must_eat != -1)
+		me->nb_must_eat--;
 }
 
 void *routine(void *import)
@@ -43,11 +45,12 @@ void *routine(void *import)
 	else
 		next = me->number + 1;
 	if ((me->number % 2) != 0)
-		ft_usleep(me->philo, 10);
-	while (me->philo->stop == 0)
+		ft_usleep(me->philo, me->philo->t_eat / 2);
+	while (me->philo->stop == 0 && me->nb_must_eat != 0)
 	{
 		ft_eat(me, next);
 		ft_sleep(me);
 	}
+	me->philo->actif_philo--;
 	return (NULL);
 }

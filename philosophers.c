@@ -12,19 +12,32 @@
 
 #include "philosophers.h"
 
-void	check_death(t_philo *philo)
+/*
+void	check_thread(t_philo *philo)
+{
+	int i;
+	
+	i = 0;
+	while (i < philo->nb_philo)
+	{
+		pthread_join(philo->tab_thread[i].id, NULL);
+		i++;
+	}
+}
+*/
+void	master_watch(t_philo *philo)
 {
 	long int	time;
 	int			i;
 
-	while (philo->stop == 0)
+	while (philo->stop == 0 && philo->actif_philo != 0)
 	{
 		i = 0;
 		while (i < philo->nb_philo)
 		{
 			time = get_time_now(philo);
 			time = time - philo->tab_thread[i].last_meal;
-			if (time >= philo->t_die)
+			if (time >= philo->t_die && philo->tab_thread[i].nb_must_eat != 0)
 				print_all(&philo->tab_thread[i], 5);
 			i++;
 		}
@@ -41,17 +54,11 @@ int main (int argc, char **argv)
 	init_mutex_fork(&philo);
 	get_time_start(&philo);
 	init_thread(&philo);
-	check_death(&philo);
-	check_thread(&philo);
+	master_watch(&philo);
+	//check_thread(&philo);
 	return (0);
 }
 
 /*
-
 checker mutex (car j ai au moins mille data race)
-implementer le nombre de repas max
-
-number_of_philosophers time_to_die time_to_eat
-time_to_sleep
-[number_of_times_each_philosopher_must_eat]
 */
