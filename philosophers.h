@@ -6,7 +6,7 @@
 /*   By: aschaefe <aschaefe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 14:57:53 by aschaefe          #+#    #+#             */
-/*   Updated: 2023/05/10 16:25:34 by aschaefe         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:32:37 by aschaefe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_philo
 	t_thread_list	*tab_thread;
 	pthread_mutex_t	*tab_mutex_fork;
 	pthread_mutex_t	print;
+	pthread_mutex_t	time;
+	pthread_mutex_t	mut_stop;
 }					t_philo;
 
 // init

@@ -6,25 +6,26 @@
 /*   By: aschaefe <aschaefe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 14:57:53 by aschaefe          #+#    #+#             */
-/*   Updated: 2023/05/10 16:36:15 by aschaefe         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:33:42 by aschaefe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 /*
-void	check_thread(t_philo *philo)
+void	clear_thread(t_philo *philo)
 {
 	int i;
 	
 	i = 0;
 	while (i < philo->nb_philo)
 	{
-		pthread_join(philo->tab_thread[i].id, NULL);
+		pthread_destroy(philo->tab_thread[i].id, NULL);
 		i++;
 	}
 }
 */
+
 void	master_watch(t_philo *philo)
 {
 	long int	time;
@@ -55,10 +56,5 @@ int main (int argc, char **argv)
 	get_time_start(&philo);
 	init_thread(&philo);
 	master_watch(&philo);
-	//check_thread(&philo);
 	return (0);
 }
-
-/*
-checker mutex (car j ai au moins mille data race)
-*/

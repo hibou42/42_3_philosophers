@@ -42,9 +42,11 @@ BS_N_TXT		=		echo "\n"
 #***** Flags *****#
 
 CC				=		gcc
-CFLAGS			=		-Wall -Wextra -Werror -pthread
+CFLAGS			=		-Wall -Wextra -Werror -pthread -fsanitize=thread -g3
 L				=		$(CFLAGS)
 RM				=		rm -f
+
+# -fsanitize=thread -g3
 
 #***** Compilation *****#
 
