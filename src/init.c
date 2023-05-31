@@ -35,13 +35,13 @@ void	init_thread(t_philo *philo)
 		free_and_exit(philo, "Impossible de créer les thread", 1);
 	i = 0;
 	while (i < philo->nb_philo)
-	{
-		test = pthread_create(&philo->tab_thread[i].id, NULL, (void*)&routine, &philo->tab_thread[i]);
-		if (test != 0)	
-			free_and_exit(philo, "Thread init fail", 1);		
+	{	
 		philo->tab_thread[i].number = i;
 		philo->tab_thread[i].philo = philo;
 		philo->tab_thread[i].nb_must_eat = philo->nb_must_eat;
+		test = pthread_create(&philo->tab_thread[i].id, NULL, (void*)&routine, &philo->tab_thread[i]);
+		if (test != 0)	
+			free_and_exit(philo, "Thread init fail", 1);	
 		i++;
 	}
 }

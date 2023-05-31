@@ -14,8 +14,10 @@
 
 void	free_and_exit(t_philo *philo, char *msg, int force_exit)
 {
-	(void)philo;
-	//clean struct
+	if (philo->tab_thread)
+		free(philo->tab_thread);
+	if (philo->tab_mutex_fork)
+		free(philo->tab_thread);
 	printf("Error : %s\n", msg);
 	if (force_exit != 0)
 		exit(1);
